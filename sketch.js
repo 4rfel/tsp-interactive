@@ -15,6 +15,13 @@ function calcDist(path) {
     return d;
 }
 
+function doubleClicked() {
+    for (i = 0; i < vs.length; i++) {
+        vs[i].ord = null;
+        vs[i].selected = false;
+    }
+}
+
 function mouseClicked() {
     const path_last = path.length - 1;
     for (let vertex of vs) {
