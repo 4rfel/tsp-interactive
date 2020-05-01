@@ -8,17 +8,17 @@ function setup() {
 function calcDist(path) {
     let d = 0;
     for (i = 1; i < path.length; i++) {
-        let dx = path[i].x - path[i - 1].x;
-        let dy = path[i].y - path[i - 1].y;
+        const dx = path[i].x - path[i - 1].x;
+        const dy = path[i].y - path[i - 1].y;
         d += dx * dx + dy * dy;
     }
     return d;
 }
 
 function doubleClicked() {
-    for (i = 0; i < vs.length; i++) {
-        vs[i].ord = null;
-        vs[i].selected = false;
+    path = [];
+    for (let vertex of vs) {
+        vertex.unselect();
     }
 }
 
@@ -58,5 +58,5 @@ function draw() {
     const d = calcDist(path);
     textSize(22);
     fill(255);
-    text("dist: " + str(d), 10, 30);
+    text("Dist: " + str(d), 10, 30);
 }
