@@ -25,11 +25,13 @@ function draw() {}
 function updated() {
     background(0);
 
-    for (let vertex of vs) vertex.update();
 
     path.draw();
     const d = (Math.round(path.calcDist() * 100) / 100).toFixed(2);
     textSize(22);
     fill(255);
     text("Dist: " + str(d), 10, 30);
+
+    for (let vertex of vs) vertex.update();
+
 }
