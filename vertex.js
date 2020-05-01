@@ -1,37 +1,36 @@
-class Vertex{
-  constructor(x, y, r){
-    this.x = x;
-    this.y = y;
-    this.r = r;
-    this.selected = false;
-    this.color = color(255);
-    this.ord = null;
-  }
-  
-  testClick(mx, my){
-    let dx = mx - this.x;
-    let dy = my - this.y;
-    const d2 = dx * dx + dy * dy;
-    if (d2 < this.r * this.r) this.selected = true;
-  }
-  
-  draw(){
-    fill(this.color);
-    noStroke();
-    circle(this.x, this.y, this.r);    
-  }
-  
-  update(ord){
-    if (this.selected) {
-      this.color = color(255, 0, 0);
-      if (ord != null) {
-        this.ord = ord;
-        ord++;
-      }
+class Vertex {
+    constructor(x, y, r = 20) {
+        this.x = x;
+        this.y = y;
+        this.r = r;
+        this.selected = false;
+        this.color = color(255);
     }
-    else this.color = color(255);
-    this.draw();
-    return ord;
-  }
 
+    testClick(mx, my) {
+        let dx = mx - this.x;
+        let dy = my - this.y;
+        const d2 = dx * dx + dy * dy;
+        return d2 < this.r * this.r;
+    }
+
+    draw() {
+        fill(this.color);
+        noStroke();
+        circle(this.x, this.y, this.r);
+    }
+
+    select() {
+        this.selected = true;
+        this.color = color(255, 0, 0);
+    }
+
+    unselect() {
+        this.selected = false;
+        this.color = color(255);
+    }
+
+    update() {
+        this.draw();
+    }
 }
