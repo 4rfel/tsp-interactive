@@ -2,7 +2,7 @@ vs = [];
 let ord = 0;
 
 function setup() {
-    createCanvas(800, 400);
+    createCanvas(400, 400);
     p1 = new Vertex(50, 150, 20);
     p2 = new Vertex(95, 249, 20);
     p3 = new Vertex(360, 112, 20);
@@ -26,6 +26,13 @@ function calcDist(path){
         d += dx * dx + dy * dy;
     }
     return d;
+}
+
+function doubleClicked() {
+    for (i = 0; i < vs.length; i++) {
+        vs[i].ord = null;
+        vs[i].selected = false;
+    }
 }
 
 function mouseClicked() {
