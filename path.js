@@ -59,7 +59,7 @@ class Path {
         */
     }
 
-    draw() {
+    draw(max_size) {
         const len = this.path.length;
         for (let i = 1; i < len; i++) {
             color(0, 255, 255);
@@ -71,6 +71,14 @@ class Path {
 
             const x2 = this.path[i - 1].x;
             const y2 = this.path[i - 1].y;
+            line(x1, y1, x2, y2);
+        }
+        if(len == max_size){
+            const x1 = this.path[0].x;
+            const y1 = this.path[0].y;
+
+            const x2 = this.path[len - 1].x;
+            const y2 = this.path[len - 1].y;
             line(x1, y1, x2, y2);
         }
     }
