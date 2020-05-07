@@ -8,8 +8,8 @@ class Vertex {
     }
 
     testClick(mx, my) {
-        let dx = mx - this.x;
-        let dy = my - this.y;
+        const dx = mx - this.x;
+        const dy = my - this.y;
         const d2 = dx * dx + dy * dy;
         return d2 < this.r * this.r;
     }

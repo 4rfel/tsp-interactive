@@ -22,10 +22,10 @@ function mouseClicked() {
     for (let vertex of vs) {
         if (vertex.testClick(mouseX, mouseY)) {
             path.click(vertex);
+            updated();
             break;
         }
     }
-    updated();
 }
 
 function draw() {}
@@ -37,7 +37,8 @@ function updated() {
     const d = (Math.round(path.calcDist() * 100) / 100).toFixed(2);
     textSize(22);
     fill(255);
-    text("Dist: " + str(d), 10, 30);
+    strokeWeight(0);
+    text("Distância: " + str(d), 10, 30);
 
     for (let vertex of vs) vertex.update();
 }
