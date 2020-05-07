@@ -1,11 +1,13 @@
 class Path {
     path = [];
-    distance = 0;
+
+    constructor(maxSize) {
+        this.maxSize = maxSize;
+    }
 
     clear() {
         for (let vertex of this.path) vertex.unselect();
         this.path = [];
-        this.distance = 0;
     }
 
     click(vertex) {
@@ -20,46 +22,36 @@ class Path {
 
     push(vertex) {
         vertex.select();
-        let last = this.path[this.path.length - 1];
-
-        if (last) {
-            // This is the first push
-            const dx = vertex.x - last.x;
-            const dy = vertex.y - last.y;
-            this.distance += Math.sqrt(dx * dx + dy * dy);
-        }
-
         this.path.push(vertex);
     }
 
     pop() {
         const vertex = this.path.pop();
-
-        let last = this.path[this.path.length - 1];
-        if (last) {
-            const dx = vertex.x - last.x;
-            const dy = vertex.y - last.y;
-            this.distance -= Math.sqrt(dx * dx + dy * dy);
-        }
-
         vertex.unselect();
         return vertex;
     }
 
     calcDist() {
-        return this.distance;
-        /*
         let d = 0;
-        for (let i = 1; i < this.path.length; i++) {
+        let i;
+        const path_len = this.path.length;
+        for (i = 1; i < path_len; i++) {
             const dx = this.path[i].x - this.path[i - 1].x;
             const dy = this.path[i].y - this.path[i - 1].y;
-            d += dx * dx + dy * dy;
+            d += Math.sqrt(dx * dx + dy * dy);
         }
+
+        if (path_len == this.maxSize) {
+            i--;
+            const dx = this.path[i].x - this.path[0].x;
+            const dy = this.path[i].y - this.path[0].y;
+            d += Math.sqrt(dx * dx + dy * dy);
+        }
+
         return d;
-        */
     }
 
-    draw(max_size) {
+    draw() {
         const len = this.path.length;
         for (let i = 1; i < len; i++) {
             color(0, 255, 255);
@@ -73,7 +65,7 @@ class Path {
             const y2 = this.path[i - 1].y;
             line(x1, y1, x2, y2);
         }
-        if(len == max_size){
+        if (len == this.maxSize) {
             const x1 = this.path[0].x;
             const y1 = this.path[0].y;
 
