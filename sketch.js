@@ -2,7 +2,9 @@ var path;
 var size;
 var vs;
 function setup() {
-    createCanvas(800, 400);
+    cnv = createCanvas(800, 400);
+    cnv.parent("canvas");
+
     let arg = location.search.substr(1);
     if (arg) {
         vs = useTemplate(Number(arg));
