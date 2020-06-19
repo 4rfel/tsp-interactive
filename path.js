@@ -31,7 +31,7 @@ class Path {
         return vertex;
     }
 
-    calcDist() {
+    calcDist(template) {
         let d = 0;
         let i;
         const path_len = this.path.length;
@@ -41,17 +41,17 @@ class Path {
             d += Math.sqrt(dx * dx + dy * dy);
         }
 
-        // if (path_len == this.maxSize) {
-        //     i--;
-        //     const dx = this.path[i].x - this.path[0].x;
-        //     const dy = this.path[i].y - this.path[0].y;
-        //     d += Math.sqrt(dx * dx + dy * dy);
-        // }
+        if (path_len == this.maxSize && template == -1) {
+            i--;
+            const dx = this.path[i].x - this.path[0].x;
+            const dy = this.path[i].y - this.path[0].y;
+            d += Math.sqrt(dx * dx + dy * dy);
+        }
 
         return d;
     }
 
-    draw() {
+    draw(template) {
         const len = this.path.length;
         for (let i = 1; i < len; i++) {
             color(0, 255, 255);
@@ -65,13 +65,13 @@ class Path {
             const y2 = this.path[i - 1].y;
             line(x1, y1, x2, y2);
         }
-        // if (len == this.maxSize) {
-        //     const x1 = this.path[0].x;
-        //     const y1 = this.path[0].y;
+        if (len == this.maxSize && template == -1) {
+            const x1 = this.path[0].x;
+            const y1 = this.path[0].y;
 
-        //     const x2 = this.path[len - 1].x;
-        //     const y2 = this.path[len - 1].y;
-        //     line(x1, y1, x2, y2);
-        // }
+            const x2 = this.path[len - 1].x;
+            const y2 = this.path[len - 1].y;
+            line(x1, y1, x2, y2);
+        }
     }
 }
